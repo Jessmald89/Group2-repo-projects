@@ -4,7 +4,7 @@ __Project/Team Lead:__ Jessica Maldonado
 __Code Developers:__ 
 1) Jose Reyes
 
-2) Jacobs Sparks
+2)Saeed Jamal Haddad
 
 3) Bryan Ramsey
 
@@ -16,7 +16,7 @@ __Document Writers:__
 3) Julia McDonald
    
 __Testers:__
-1) Saeed Jamal Haddad
+1) Jacob Sparks 
 
 2) Ivan Real
    
@@ -30,7 +30,7 @@ Check-In: Daily
 
 Meetings: 1-2x per week
 
-Sprint 1 Instructor meeting:
+Sprint 1 Instructor meeting: 10/04/23
 
 Sprint 2 Instructor meeting:
 
