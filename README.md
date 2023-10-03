@@ -4,7 +4,7 @@ __Project/Team Lead:__ Jessica Maldonado
 __Code Developers:__ 
 1) Jose Reyes
 
-2)Saeed Jamal Haddad
+2) Saeed Jamal Haddad
 
 3) Bryan Ramsey
 
