@@ -51,6 +51,7 @@ Secondary Lab F/U
 
 # Selenium Lab
 __Introduction__
+
 Selenium is an extremely popular testing tool for web UI testing. Selenium is free & open source, making it a great option for most developers. There are three components offered in the Selenium Suite – WebDriver, IDE, and Grid. This tutorial will focus on WebDriver.
 
 __Getting Started__
