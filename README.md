@@ -2,7 +2,7 @@
 __Project/Team Lead:__ Jessica Maldonado
 
 __Code Developers:__ 
-1) Jose Reyes
+1) Jacob Sparks
 
 2) Saeed Jamal Haddad
 
@@ -16,7 +16,7 @@ __Document Writers:__
 3) Julia McDonald
    
 __Testers:__
-1) Jacob Sparks 
+1) Jose Reyes
 
 2) Ivan Real
    
