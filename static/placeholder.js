@@ -1,0 +1,1 @@
+// If we choose to use JavaScript, place all .js files in this static folder.
