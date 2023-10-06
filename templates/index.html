@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Flask App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket</title>
 </head>
 <body>
-    <h1>Welcome to My Flask App</h1>
-    <p>{{ message }}</p>
+    <h1>Supermarket</h1>
+    <form method="POST">
+        <label for="operation">Select an item:</label>
+        <select name="operation" required>
+            <option value="banana">Banana</option>
+            <option value="apple">Apple</option>
+            <option value="orange">Orange</option>
+        </select>
+        <br>
+        <input type="submit" value="Add to cart">
+    </form>
+    <br>
+    <h2>Your Cart:</h2>
+    <p>Items: {{ inventory }}</p>
+    <p>Subtotal: ${{ subtotal }}</p>
 </body>
 </html>
