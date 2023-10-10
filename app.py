@@ -14,18 +14,34 @@ It also specifies "GET" and "POST" as methods that the route can handle.
 @app.route("/", methods=["GET", "POST"])  
 def index():
     if request.method == "POST":       # Provides instructions for a form whose method is "POST"
-        add_operation = request.form["add_operation"]   # Finds element in html template where name="add_operation"
+        if "form1_submit" in request.form:
+            add_operation = request.form["add_operation"]   # Finds element in html template where name="add_operation"
 
-        if add_operation == "banana":
-            banana = Food("Banana", BANANA_PRICE)
-            user_cart.add(banana)
-        elif add_operation == "apple":
-            apple = Food("Apple", APPLE_PRICE)
-            user_cart.add(apple)
-        elif add_operation == "orange":
-            orange = Food("Orange", ORANGE_PRICE)
-            user_cart.add(orange)
+            if add_operation == "banana":
+                banana = Food("Banana", BANANA_PRICE)
+                user_cart.add(banana)
+            elif add_operation == "apple":
+                apple = Food("Apple", APPLE_PRICE)
+                user_cart.add(apple)
+            elif add_operation == "orange":
+                orange = Food("Orange", ORANGE_PRICE)
+                user_cart.add(orange)
 
+        elif "form2_submit" in request.form:
+            remove_operation = request.form["remove_operation"] # Finds element in html template where name="remove_operation"
+            if remove_operation == "banana":
+                banana = Food("Banana", BANANA_PRICE)
+                user_cart.remove(banana)
+            elif remove_operation == "apple":
+                apple = Food("Apple", APPLE_PRICE)
+                user_cart.remove(apple)
+            elif remove_operation == "orange":
+                orange = Food("Orange", ORANGE_PRICE)
+                user_cart.remove(orange)
+
+        elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
+            user_cart.clear()
+            
         # Check for Discount Code
         discount_code = request.form.get("discount_code")
         if discount_code == DISCOUNT_CODE:

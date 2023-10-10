@@ -9,10 +9,11 @@ class Cart(object):
         self.subtotal += item.price
 
     def remove(self, item):
-        if not item in self:
-            raise KeyError(str(item) + " not in cart")
-        self.items.remove(item.name)
-        self.subtotal -= item.price
+        if item.name in self.items:
+            self.items.remove(item.name)
+            self.subtotal -= item.price
+        else:
+            raise ValueError(item.name + " not in cart")
     
     def apply_discount(self, discount_percentage):
         if 0 <= discount_percentage <= 1:
@@ -27,3 +28,9 @@ class Cart(object):
     def display(self):
         print(f"Your cart: {self.items}")
         print(f"Your subtotal: ${self.subtotal:.2f}")
+
+    def clear(self):
+        self.items.clear()
+        self.subtotal = 0.0
+        self.discount = 0.0
+        print("Thank you for purchasing!")
