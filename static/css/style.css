@@ -1,0 +1,28 @@
+body {
+    font-size:12pt;
+    font-family:verdana;
+}
+
+.border {
+    border: 5px black;
+}
+
+.banner {
+    color: white;
+    text-align: center;
+    background-color: black;
+    padding: 5px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    border: 3px black;
+    padding: 10px;
+}
+  

@@ -3,27 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supermarket</title>
+    <title>Fruit Stand</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 </head>
 <body>
-    <h1>Supermarket</h1>
-    <form method="POST">
-        <label for="operation">Select an item:</label>
-        <select name="operation" required>
-            <option value="banana">Banana</option>
-            <option value="apple">Apple</option>
-            <option value="orange">Orange</option>
-        </select>
+    <div class="center">
+        <h1 class="banner">Fruit Stand</h1>
+        <form method="POST" class="center">
+            <fieldset>
+                <label for="add_operation">Select an item:</label>
+                <select name="add_operation" required>
+                    <option value="banana">Banana</option>
+                    <option value="apple">Apple</option>
+                    <option value="orange">Orange</option>
+                </select>
+            </fieldset>
+            <br>
+            <!--Added Discount Code Input-->
+            <label for="discount_code">Enter Discount Code:</label>
+            <input type="text" name="discount_code" value="e.g. DISCOUNT20">
+            <br>
+            <br>
+            <fieldset>
+                <input type="submit" name="form1_submit" value="Add to cart">
+                <input type="button" value="Purchase">
+            </fieldset>
+        </form>
         <br>
-        <!--Added Discount Code Input-->
-        <label for="discount_code">Enter Discount Code:</label>
-        <input type="text" name="discount_code">
+        <form method="POST" class="center">
+            <fieldset>
+                <label for="remove_operation">Remove an item:</label>
+                <select name="remove_operation" required>
+                    <option value="banana">Banana</option>
+                    <option value="apple">Apple</option>
+                    <option value="orange">Orange</option>
+                </select>
+
+                <input type="button" value="Remove">
+            </fieldset>
+            <br>
+        </form>
         <br>
-        <input type="submit" value="Add to cart">
-    </form>
-    <br>
-    <h2>Your Cart:</h2>
-    <p>Items: {{ inventory }}</p>
-    <p>Subtotal: ${{ subtotal }}</p>
+        <h2>Your Cart:</h2>
+        <p>Items: {{ inventory }}</p>
+        <p>Subtotal: ${{ subtotal }}</p>
+    </div>
+
 </body>
 </html>

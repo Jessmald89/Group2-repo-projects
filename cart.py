@@ -18,7 +18,7 @@ class Cart(object):
         if 0 <= discount_percentage <= 1:
             self.discount = discount_percentage
         else: 
-            raise ValueError("Disocount percentage must be between 0 and 1.")
+            raise ValueError("Discount percentage must be between 0 and 1.")
     
     def calculate_total(self):
         discounted_total = self.subtotal * (1 - self.discount)
