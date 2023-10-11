@@ -13,6 +13,8 @@ It also specifies "GET" and "POST" as methods that the route can handle.
 '''
 @app.route("/", methods=["GET", "POST"])  
 def index():
+    total = user_cart.calculate_total()
+
     if request.method == "POST":       # Provides instructions for a form whose method is "POST"
         if "form1_submit" in request.form:
             add_operation = request.form["add_operation"]   # Finds element in html template where name="add_operation"
@@ -42,13 +44,13 @@ def index():
         elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
             user_cart.clear()
             
-        # Check for Discount Code
-        discount_code = request.form.get("discount_code")
-        if discount_code == DISCOUNT_CODE:
-            # Apply a discount if the provided code matches
-            user_cart.apply_discount(DISCOUNT)  # e.x. 20% discount
+        elif "form4_submit" in request.form: #Applies a discount code. Updates subtotal into Total.
+            discount_code = request.form.get("discount_code")
+            if discount_code == DISCOUNT_CODE:
+                user_cart.apply_discount(DISCOUNT)
+                total = user_cart.calculate_total()
 
-    return render_template("index.html", inventory=user_cart.items, subtotal=user_cart.subtotal) # Rendering templates is how Flask interfaces with html.
+    return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=total)# Rendering templates is how Flask interfaces with html.
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version (e.g. for the labs most likely?)
