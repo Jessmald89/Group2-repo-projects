@@ -3,9 +3,11 @@ class Cart(object):
         self.items = []
         self.subtotal = 0.0
         self.discount = 0.0
+        self.purchase_message = ""
         self.discount_applied = False 
 
     def add(self, item):
+        self.purchase_message = ""
         self.items.append(item.name)
         self.subtotal += item.price
 
@@ -34,9 +36,9 @@ class Cart(object):
         print(f"Your cart: {self.items}")
         print(f"Your subtotal: ${self.subtotal:.2f}")
 
-    def clear(self):
+    def purchase(self):
         self.items.clear()
         self.subtotal = 0.0
         self.discount = 0.0
         self.discount_applied = False # Resets total and discount code
-        print("Thank you for purchasing!")
+        self.purchase_message = "Thank you for purchasing!"

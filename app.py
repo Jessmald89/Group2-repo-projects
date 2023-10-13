@@ -42,7 +42,7 @@ def index():
                 user_cart.remove(orange)
 
         elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
-            user_cart.clear()
+            user_cart.purchase()
             
         elif "form4_submit" in request.form: #Applies a discount code. Updates subtotal into Total.
             discount_code = request.form.get("discount_code")
@@ -50,7 +50,7 @@ def index():
                 user_cart.apply_discount(DISCOUNT)
                 total = user_cart.calculate_total()
 
-    return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=total)# Rendering templates is how Flask interfaces with html.
+    return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=total, purchase_message=user_cart.purchase_message)# Rendering templates is how Flask interfaces with html.
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version (e.g. for the labs most likely?)
