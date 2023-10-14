@@ -1,0 +1,81 @@
+SRS – Selenium Lab
+
+1. Introduction
+
+1.1. Purpose: This document covers software functional and non-functional and other specifications related to the Selenium Lab section of our group project.
+
+1.2. Scope: This document describes requirements, functional and non-functional components of the Selenium Lab.
+
+2. System Overview
+
+2.1. Objectives of Selenium Lab
+
+2.1.1. Authenticate functionalities of the web application and User Interface.
+
+2.1.2. Further expand understanding of Python and Selenium WebDriver interactions.
+
+2.1.3. Automate web application testing and browser actions.
+
+2.2. Technologies and Tools Used
+
+2.2.1. Selenium WebDriver
+
+2.2.2.Python
+
+3. Functional Requirements
+
+3.1. Validation
+
+3.1.1.Validate elements of the web page to ensure outputs and page functions perform as expected.
+
+3.2. Web Browser Automation
+
+3.2.1. Task automation for web browser tasks such as opening and closing the browser, navigating to a webpage, using links, and filling out forms.
+
+3.3. User Interface Interactions
+
+3.3.1. Utilize various user interface points including dropdown menus, radio buttons, text boxes and buttons.
+
+3.4. Reports
+
+3.4.1. Generate logs detailing pass or fail of associated tests.
+
+4. Non-Functional Requirements
+
+4.1. Reliability
+
+4.1.1.Tests should run consistently and produce reliable results.
+
+4.2. Performance
+
+4.2.1. Tests should be able to run without excessive runtimes or too long of a pause between test starts and finishes.
+
+4.3. Scalability
+
+4.3.1.Tests should be designed in a way to be adapted to accommodate future additional features if needed.
+
+5. Setup and Environments Requirement
+
+5.1. Supported web browser. **
+
+5.2. Selenium WebDriver v4.0 or higher.
+
+5.3. Python version 3.8 or higher.
+
+6. Deliverables
+
+6.1. Automated scripts for relevant test scenarios.
+
+6.2. Testing execution authentication report.
+
+7. Conclusion
+
+7.1. This lab is a walkthrough to web automation using the Selenium library with python. The user should be able to grasp the basic concepts of web interactions and testing validations.
+
+8. Appendices
+
+8.1. Reference Materials Used
+
+8.1.1. Selenium Documentation - https://www.selenium.dev/documentation/webdriver/
+
+8.1.2. Python Documentation - https://www.python.org/doc/
