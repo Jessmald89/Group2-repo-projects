@@ -38,7 +38,7 @@ Sprint 3 Instructor meeting:
 
 Sprint 4 Instructor meeting:
 
-Selenium Lab F/U
+Selenium Lab F/U: 10/15/23
 
 BDD Lab F/U
 
