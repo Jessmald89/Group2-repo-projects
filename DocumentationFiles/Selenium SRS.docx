@@ -20,7 +20,9 @@ SRS – Selenium Lab
 
 2.2.1. Selenium WebDriver
 
-2.2.2.Python
+2.2.2. Python
+
+2.2.3. Flask
 
 3. Functional Requirements
 
@@ -68,6 +70,8 @@ SRS – Selenium Lab
 
 6.2. Testing execution authentication report.
 
+6.3. Selenium Webdriver initial setup and installation covered in README in reference materials used section 8.1 of this document.
+
 7. Conclusion
 
 7.1. This lab is a walkthrough to web automation using the Selenium library with python. The user should be able to grasp the basic concepts of web interactions and testing validations.
@@ -76,6 +80,10 @@ SRS – Selenium Lab
 
 8.1. Reference Materials Used
 
-8.1.1. Selenium Documentation - https://www.selenium.dev/documentation/webdriver/
+8.1.1. Selenium Documentation - https://www.selenium.dev/documentation/webdriver/ **
 
 8.1.2. Python Documentation - https://www.python.org/doc/
+
+8.1.3 Flask Documentation - https://flask.palletsprojects.com/en/3.0.x/
+
+8.1.4 Selenium WebDriver Installation Walkthrough - https://github.com/Jessmald89/Group2-repo-projects#readme
