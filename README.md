@@ -31,7 +31,7 @@ Meetings: 1-2x per week
 
 Sprint 1 Instructor meeting: 10/04/23
 
-Sprint 2 Instructor meeting:
+Sprint 2 Instructor meeting: 10/24/23 @ 7pm
 
 Sprint 3 Instructor meeting:
 
