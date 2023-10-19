@@ -2,11 +2,10 @@
 __Project/Team Lead:__ Jessica Maldonado
 
 __Code Developers:__ 
-1) Jacob Sparks
 
-2) Saeed Jamal Haddad
+1) Saeed Jamal Haddad
 
-3) Bryan Ramsey
+2) Bryan Ramsey
 
 __Document Writers:__
 1) Andrew Bader
@@ -18,7 +17,7 @@ __Document Writers:__
 __Testers:__
 1) Jose Reyes
 
-2) Ivan Real
+2) Jacob Sparks
    
 __Schedule:__
 
@@ -39,6 +38,8 @@ Sprint 3 Instructor meeting:
 Sprint 4 Instructor meeting:
 
 Selenium Lab F/U: 10/15/23
+
+RTM Meeting: 10/20/23
 
 BDD Lab F/U
 
