@@ -21,7 +21,7 @@
             <br>
             <br>
             <fieldset>
-                <input type="submit" name="form1_submit" value="Add to cart">
+                <input type="submit" name="form1_submit" value="Add to cart" />
 
             </fieldset>
         </form>
@@ -35,7 +35,7 @@
                     <option value="orange">Orange</option>
                 </select>
 
-                <input type="submit" name="form2_submit" value="Remove">
+                <input type="submit" name="form2_submit" value="Remove" />
             </fieldset>
             <br>
         </form>
@@ -44,11 +44,11 @@
         <form method="POST" class="center">
             <fieldset>
                 <label for="discount_code">Enter Discount Code:</label>
-                <input type="text" name="discount_code">
+                <input type="text" name="discount_code" />
             </fieldset>
             <br>
             <fieldset>
-                <input type="submit" name="form4_submit" value="Apply Discount">
+                <input type="submit" name="form4_submit" value="Apply Discount" />
             </fieldset>
         </form>
         <br>
@@ -56,13 +56,13 @@
         <form method="POST" class="center">
             <fieldset>
                 <label for="purchase_operation">Purchase Items in Cart:</label>
-                <input type="submit" name="form3_submit" value="Purchase">
+                <input type="submit" name="form3_submit" value="Purchase" />
             </fieldset>
             <br>
         </form>
         <br>
         <h2>Your Cart:</h2>
-        <p>Items: {{ inventory }}</p>
+        <p name="item_display">Items: {{ inventory }}</p>
         <p>Subtotal: ${{ subtotal }}</p>
         
         {% if cart.discount_applied %}
