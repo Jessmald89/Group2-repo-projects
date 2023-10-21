@@ -39,7 +39,7 @@ Sprint 4 Instructor meeting:
 
 Selenium Lab F/U: 10/15/23
 
-RTM Meeting: 10/20/23
+RTM Meeting: 10/22/23
 
 BDD Lab F/U
 
