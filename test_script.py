@@ -70,6 +70,18 @@ def test_invalid_item_removal(browser):
     remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
     remove_from_cart.click()
 
+def test_empty_cart_removal(browser):
+    # Access the app
+    browser.get('http://localhost:5000')
+
+    # Attempt to remove items from an empty cart (e.g., 'Orange')
+    select = Select(browser.find_element(By.NAME, 'remove_operation'))
+    select.select_by_visible_text('Orange')
+
+    # Clicks 'Remove from Cart' button
+    remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
+    remove_from_cart.click()
+
 def test_input(browser):
     browser.get('http://localhost:5000')  # Access the app
     test_disc_code = 'DISCOUNT20'
