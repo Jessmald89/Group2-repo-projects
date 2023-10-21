@@ -29,16 +29,21 @@ def index():
                 user_cart.add(orange)
 
         elif "form2_submit" in request.form:
-            remove_operation = request.form["remove_operation"] # Finds element in html template where name="remove_operation"
-            if remove_operation == "banana":
+            remove_operation = request.form["remove_operation"]
+            
+            # Check if the cart is not empty before attempting removal
+            if remove_operation == "banana" and "Banana" in user_cart.items:
                 banana = Food("Banana", BANANA_PRICE)
                 user_cart.remove(banana)
-            elif remove_operation == "apple":
+            elif remove_operation == "apple" and "Apple" in user_cart.items:
                 apple = Food("Apple", APPLE_PRICE)
                 user_cart.remove(apple)
-            elif remove_operation == "orange":
+            elif remove_operation == "orange" and "Orange" in user_cart.items:
                 orange = Food("Orange", ORANGE_PRICE)
                 user_cart.remove(orange)
+            else:
+                error_message = "Item not found in the cart."
+                return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message, error_message=error_message)
 
         elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
             user_cart.purchase()
