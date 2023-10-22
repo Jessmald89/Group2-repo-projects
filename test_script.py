@@ -75,6 +75,9 @@ def test_remove_item(browser):
     assert "Banana" in cart.text, "Item not removed from cart."
 
 def test_invalid_item_removal(browser):
+    """
+    Test that attempts to remove an item not in cart are properly handled.
+    """
     # Access the app
     browser.get('http://localhost:5000')
 
@@ -92,7 +95,9 @@ def test_invalid_item_removal(browser):
 
     # Click "Remove from Cart" button
     remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
-    remove_from_cart.click()
+    with pytest.raises(ValueError, match="Item not in cart"):
+        remove_from_cart.click()
+    
 
     cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
     assert "Orange" not in cart.text, "Invalid item added to cart."
