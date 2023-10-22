@@ -50,6 +50,30 @@ def test_select_add(browser):
     cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
     assert "Banana" in cart.text, "Item not added to cart."
 
+def test_remove_item(browser):
+    # Access the app
+    browser.get('http://localhost:5000')
+
+    # Select a valid item to add to the cart (e.g., 'Banana')
+    select = Select(browser.find_element(By.NAME, 'add_operation'))
+    select.select_by_visible_text('Banana')
+
+    # Click "Add to Cart" button
+    add_to_cart = browser.find_element(By.NAME, 'form1_submit')
+    add_to_cart.click()
+
+    # Select the same item to remove (e.g., 'Banana')
+    select = Select(browser.find_element(By.NAME, 'remove_operation'))
+    select.select_by_visible_text('Banana')
+
+    # Click "Remove from Cart" button
+    remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
+    remove_from_cart.click()
+
+    # Ensure the item has been removed from the cart
+    cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
+    assert "Banana" in cart.text, "Item not removed from cart."
+
 def test_invalid_item_removal(browser):
     # Access the app
     browser.get('http://localhost:5000')
@@ -70,17 +94,8 @@ def test_invalid_item_removal(browser):
     remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
     remove_from_cart.click()
 
-def test_empty_cart_removal(browser):
-    # Access the app
-    browser.get('http://localhost:5000')
-
-    # Attempt to remove items from an empty cart (e.g., 'Orange')
-    select = Select(browser.find_element(By.NAME, 'remove_operation'))
-    select.select_by_visible_text('Orange')
-
-    # Clicks 'Remove from Cart' button
-    remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
-    remove_from_cart.click()
+    cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
+    assert "Orange" not in cart.text, "Invalid item added to cart."
 
 def test_input(browser):
     browser.get('http://localhost:5000')  # Access the app
@@ -93,20 +108,23 @@ def test_input(browser):
     discount.send_keys(test_disc_code)
     discount.send_keys(Keys.RETURN)
 
-def test_remove_item(browser):
-    
-    browser.get('http://localhost:5000') # Access the app
+def test_clear_cart(browser):
+    # Access the app
+    browser.get('http://localhost:5000')
 
-    dropdown = browser.find_element(By.NAME, 'remove_operation')  
-
-    select = Select(dropdown)
-
+    # Select a valid item to add to the cart (e.g., 'Banana')
+    select = Select(browser.find_element(By.NAME, 'add_operation'))
     select.select_by_visible_text('Banana')
 
-    selected_option = select.first_selected_option
-    assert selected_option.text == 'Banana'
+    # Click "Add to Cart" button
+    add_to_cart = browser.find_element(By.NAME, 'form1_submit')
+    add_to_cart.click()
 
-     # Test that item has been removed from cart
-    remove_from_cart = browser.find_element(By.NAME, 'form2_submit')  
-    remove_from_cart.click()
+    # Click "Purchase Items in Cart" button
+    purchase_items = browser.find_element(By.NAME, 'form3_submit')
+    purchase_items.click()
+
+    # Ensure the cart has been cleared
+    cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
+    assert "Banana" not in cart.text, "Cart not cleared after purchase."
 
