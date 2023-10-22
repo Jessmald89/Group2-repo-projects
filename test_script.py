@@ -51,6 +51,9 @@ def test_select_add(browser):
     assert "Banana" in cart.text, "Item not added to cart."
 
 def test_invalid_item_removal(browser):
+    """
+    Test that attempts to remove an item not in cart are properly handled.
+    """
     # Access the app
     browser.get('http://localhost:5000')
 
@@ -68,7 +71,9 @@ def test_invalid_item_removal(browser):
 
     # Click "Remove from Cart" button
     remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
-    remove_from_cart.click()
+    with pytest.raises(ValueError, match="Item not in cart"):
+        remove_from_cart.click()
+    
 
 def test_empty_cart_removal(browser):
     # Access the app

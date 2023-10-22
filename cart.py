@@ -19,7 +19,7 @@ class Cart(object):
             self.subtotal -= item.price
             self.update_total()
         else:
-            raise ValueError(item.name + " not in cart")
+            raise ValueError("Item not in cart")
     
     def update_total(self): # Updates the total when new items are added 
         discounted_total = self.subtotal * (1 - self.discount)
