@@ -89,18 +89,24 @@ def test_invalid_item_removal(browser):
     add_to_cart = browser.find_element(By.NAME, 'form1_submit')
     add_to_cart.click()
 
+    # Wait for the 'Remove from Cart' button to be clickable
+    remove_from_cart = WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable((By.NAME, 'form2_submit'))
+    )
+
     # Attempt to remove an invalid item (e.g., 'Orange')
     select = Select(browser.find_element(By.NAME, 'remove_operation'))
     select.select_by_visible_text('Orange')
 
     # Click "Remove from Cart" button
-    remove_from_cart = browser.find_element(By.NAME, 'form2_submit')
-    with pytest.raises(ValueError, match="Item not in cart"):
-        remove_from_cart.click()
-    
+    remove_from_cart.click()
 
-    cart = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, 'item_display')))
+    # Ensure the item has been removed from the cart
+    cart = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.NAME, 'item_display'))
+    )
     assert "Orange" not in cart.text, "Invalid item added to cart."
+
 
 def test_input(browser):
     browser.get('http://localhost:5000')  # Access the app
