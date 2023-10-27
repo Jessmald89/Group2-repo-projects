@@ -43,7 +43,7 @@ def index():
                 user_cart.remove(orange)
             else:
                 error_message = "Item not found in the cart."
-                return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message, error_message=error_message)
+                return render_template("index.html", cart=user_cart, cart_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message, error_message=error_message)
 
         elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
             user_cart.purchase()
@@ -53,7 +53,7 @@ def index():
             if discount_code == DISCOUNT_CODE:
                 user_cart.apply_discount(DISCOUNT)
 
-    return render_template("index.html", cart=user_cart, inventory=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message)# Rendering templates is how Flask interfaces with html.
+    return render_template("index.html", cart=user_cart, cart_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message)# Rendering templates is how Flask interfaces with html.
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version (e.g. for the labs most likely?)

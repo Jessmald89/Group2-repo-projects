@@ -7,68 +7,63 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 </head>
 <body>
-    <div class="center">
-        <h1 class="banner">Fruit Stand</h1>
-        <form method="POST" class="center">
-            <fieldset>
-                <label for="add_operation">Select an item:</label>
-                <select name="add_operation" required>
-                    <option value="banana">Banana</option>
-                    <option value="apple">Apple</option>
-                    <option value="orange">Orange</option>
-                </select>
-            </fieldset>
+    <div class="centered-container"></div>
+    <h1 class="banner">Fruit Stand</h1>
+        <div class="left-box">
+            <form method="POST">
+                <fieldset>
+                    <label for="add_operation">Select an item:</label>
+                    <select name="add_operation" required>
+                        <option value="banana">Banana</option>
+                        <option value="apple">Apple</option>
+                        <option value="orange">Orange</option>
+                    </select>
+                    <input type="submit" name="form1_submit" value="Add to cart" />
+                </fieldset>
+            </form>
             <br>
-            <br>
-            <fieldset>
-                <input type="submit" name="form1_submit" value="Add to cart" />
+            <form method="POST">
+                <fieldset>
+                    <label for="remove_operation">Remove an item:</label>
+                    <select name="remove_operation" required>
+                        <option value="banana">Banana</option>
+                        <option value="apple">Apple</option>
+                        <option value="orange">Orange</option>
+                    </select>
 
-            </fieldset>
-        </form>
-        <br>
-        <form method="POST" class="center">
-            <fieldset>
-                <label for="remove_operation">Remove an item:</label>
-                <select name="remove_operation" required>
-                    <option value="banana">Banana</option>
-                    <option value="apple">Apple</option>
-                    <option value="orange">Orange</option>
-                </select>
-
-                <input type="submit" name="form2_submit" value="Remove" />
-            </fieldset>
+                    <input type="submit" name="form2_submit" value="Remove" />
+                </fieldset>
+            </form>
             <br>
-        </form>
-        <br>
-        <br>
-        <form method="POST" class="center">
-            <fieldset>
-                <label for="discount_code">Enter Discount Code:</label>
-                <input type="text" name="discount_code" />
-            </fieldset>
+            <form method="POST">
+                <fieldset>
+                    <label for="discount_code">Enter Discount Code:</label>
+                    <input type="text" name="discount_code" />
+                    <input type="submit" name="form4_submit" value="Apply Discount" />
+                </fieldset>
+            </form>
             <br>
-            <fieldset>
-                <input type="submit" name="form4_submit" value="Apply Discount" />
-            </fieldset>
-        </form>
-        <br>
-        <br>
-        <form method="POST" class="center">
-            <fieldset>
-                <label for="purchase_operation">Purchase Items in Cart:</label>
-                <input type="submit" name="form3_submit" value="Purchase" />
-            </fieldset>
+            <form method="POST">
+                <fieldset>
+                    <label for="purchase_operation">Purchase Items in Cart:</label>
+                    <input type="submit" name="form3_submit" value="Purchase" />
+                </fieldset>
+                <br>
+            </form>
             <br>
-        </form>
-        <br>
-        <h2>Your Cart:</h2>
-        <p name="item_display">Items: {{ inventory }}</p>
-        <p>Subtotal: ${{ subtotal }}</p>
-        
-        {% if cart.discount_applied %}
-            <p>Total: ${{ cart.total }}</p>
-        {% endif %}
-        <p>{{ purchase_message }}</p>
-    </div>
+        </div>
+        <div class="right-box">
+            <h2>Your Cart:</h2>
+            {% for fruit in cart_list %}
+                <p name="item_display">${{ i }} | {{ fruit }} </p>
+            {% endfor %}
+            <p>Subtotal: ${{ subtotal }}</p>
+            
+            {% if cart.discount_applied %}
+                <p>Total: ${{ cart.total }}</p>
+            {% endif %}
+            <p>{{ purchase_message }}</p>
+        </div>
+    <div>
 </body>
 </html>
