@@ -1,6 +1,8 @@
+from constant_values import BANANA_PRICE, APPLE_PRICE, ORANGE_PRICE
+
 class Cart(object):
     def __init__(self):
-        self.items = []
+        self.item_names = []
         self.subtotal = 0.0
         self.discount = 0.0
         self.purchase_message = ""
@@ -9,18 +11,28 @@ class Cart(object):
 
     def add(self, item):
         self.purchase_message = ""
-        self.items.append(item.name)
+        self.item_names.append(item)
         self.subtotal += item.price
         self.update_total()
 
     def remove(self, item):
-        if item.name in self.items:
-            self.items.remove(item.name)
-            self.subtotal -= item.price
-            self.update_total()
-        else:
-            raise ValueError("Item not in cart")
-    
+        for i in self.item_names:
+            if item.name == i.name:
+                self.item_names.remove(i)
+                self.subtotal -= item.price
+                self.update_total()
+                return "Item removed successfully."
+            else:
+                error_message = "Item not found in the cart!"
+                return error_message
+        return ""
+        
+    def sort(self, mode):
+        if mode == "asc":
+            self.item_names.sort(key=lambda fruit: fruit.price, reverse=False)
+        if mode == "desc":
+            self.item_names.sort(key=lambda fruit: fruit.price, reverse=True)
+
     def update_total(self): # Updates the total when new items are added 
         discounted_total = self.subtotal * (1 - self.discount)
         self.total = round(discounted_total, 2)
@@ -39,13 +51,14 @@ class Cart(object):
     def calculate_total(self):
         discounted_total = self.subtotal * (1 - self.discount)
         return round(discounted_total, 2)
+    
 
     def display(self):
-        print(f"Your cart: {self.items}")
+        print(f"Your cart: {self.item_names}")
         print(f"Your subtotal: ${self.subtotal:.2f}")
 
     def purchase(self):
-        self.items.clear()
+        self.item_names.clear()
         self.subtotal = 0.0
         self.discount = 0.0
         self.discount_applied = False # Resets total and discount code

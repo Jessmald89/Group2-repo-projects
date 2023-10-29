@@ -13,8 +13,10 @@ It also specifies "GET" and "POST" as methods that the route can handle.
 '''
 @app.route("/", methods=["GET", "POST"])  
 def index():
-
-    if request.method == "POST":       # Provides instructions for a form whose method is "POST"
+    remove_message = ""  
+    # Provides instructions for a form whose method is "POST"
+    if request.method == "POST":
+        # Adds item to cart
         if "form1_submit" in request.form:
             add_operation = request.form["add_operation"]   # Finds element in html template where name="add_operation"
 
@@ -28,32 +30,42 @@ def index():
                 orange = Food("Orange", ORANGE_PRICE)
                 user_cart.add(orange)
 
+        # Removes item from cart
         elif "form2_submit" in request.form:
             remove_operation = request.form["remove_operation"]
             
             # Check if the cart is not empty before attempting removal
-            if remove_operation == "banana" and "Banana" in user_cart.items:
+            if remove_operation == "banana":
                 banana = Food("Banana", BANANA_PRICE)
-                user_cart.remove(banana)
-            elif remove_operation == "apple" and "Apple" in user_cart.items:
+                remove_message = user_cart.remove(banana)
+            elif remove_operation == "apple":
                 apple = Food("Apple", APPLE_PRICE)
-                user_cart.remove(apple)
-            elif remove_operation == "orange" and "Orange" in user_cart.items:
+                remove_message = user_cart.remove(apple)
+            elif remove_operation == "orange":
                 orange = Food("Orange", ORANGE_PRICE)
-                user_cart.remove(orange)
-            else:
-                error_message = "Item not found in the cart."
-                return render_template("index.html", cart=user_cart, cart_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message, error_message=error_message)
+                remove_message = user_cart.remove(orange)
 
-        elif "form3_submit" in request.form: #Clears the list and resets the subtotal. Confirms Purchase.
+        #Clears the list and resets the subtotal. Confirms Purchase.
+        elif "form3_submit" in request.form: 
             user_cart.purchase()
-            
-        elif "form4_submit" in request.form: #Applies a discount code. Updates subtotal into Total.
+        
+        #Applies a discount code. Updates subtotal into Total.
+        elif "form4_submit" in request.form: 
             discount_code = request.form.get("discount_code")
             if discount_code == DISCOUNT_CODE:
                 user_cart.apply_discount(DISCOUNT)
 
-    return render_template("index.html", cart=user_cart, cart_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message)# Rendering templates is how Flask interfaces with html.
+        # Sorts the items in the cart by price in descending order
+        elif "form5_submit" in request.form and request.form['form5_submit'] == 'High-to-Low': 
+            user_cart.sort("desc")
+
+        # Sorts the items in the cart by price in ascending order
+        elif "form5_submit" in request.form and request.form['form5_submit'] == 'Low-to-High': 
+            user_cart.sort("asc")
+
+    return render_template("index.html", cart=user_cart, item_list=user_cart.item_names, subtotal=user_cart.subtotal, 
+                           total=user_cart.total, purchase_message=user_cart.purchase_message, remove_message=remove_message,
+                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)# Rendering templates is how Flask interfaces with html.
 
 if __name__ == "__main__":
-    app.run(debug=True) # Runs app in debug mode, change debug=False for production version (e.g. for the labs most likely?)
+    app.run(debug=True) # Runs app in debug mode, change debug=False for production version

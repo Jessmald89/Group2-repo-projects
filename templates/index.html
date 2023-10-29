@@ -53,14 +53,32 @@
             <br>
         </div>
         <div class="right-box">
+            <form method="POST">
+                <fieldset>
+                    <input type="submit" name="form5_submit" value="High-to-Low" />
+                    <input type="submit" name="form5_submit" value="Low-to-High" />
+                </fieldset>
+                <br>
+            </form>
             <h2>Your Cart:</h2>
-            {% for fruit in cart_list %}
-                <p name="item_display">${{ i }} | {{ fruit }} </p>
+            {% for fruit in item_list %}
+                {% if fruit.name == "Banana" %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% elif fruit.name == "Apple"  %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% elif fruit.name == "Orange"  %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% endif %}
             {% endfor %}
-            <p>Subtotal: ${{ subtotal }}</p>
-            
+
+            <p>Subtotal: ${{ "%.2f"|format(subtotal) }}</p>
+            {% if remove_message == "Item not found in the cart!" %}
+                <p>{{ remove_message }}</p>
+            {% else %}
+                <p></p>
+            {% endif %}
             {% if cart.discount_applied %}
-                <p>Total: ${{ cart.total }}</p>
+                <p>Total: ${{ "%.2f"|format(cart.total) }}</p>
             {% endif %}
             <p>{{ purchase_message }}</p>
         </div>
