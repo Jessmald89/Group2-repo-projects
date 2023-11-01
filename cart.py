@@ -8,11 +8,13 @@ class Cart(object):
         self.purchase_message = ""
         self.discount_applied = False 
         self.total = 0.0
-
+        self.quantity = {'banana':5, 'apple':5, 'orange':5}
+        
     def add(self, item):
         self.purchase_message = ""
         self.item_names.append(item)
         self.subtotal += item.price
+        self.dec_quantity(item)
         self.update_total()
 
     def remove(self, item):
@@ -20,6 +22,7 @@ class Cart(object):
             if item.name == i.name:
                 self.item_names.remove(i)
                 self.subtotal -= item.price
+                self.inc_quantity(item)
                 self.update_total()
                 return "Item removed successfully."
             else:
@@ -32,6 +35,35 @@ class Cart(object):
             self.item_names.sort(key=lambda fruit: fruit.price, reverse=False)
         if mode == "desc":
             self.item_names.sort(key=lambda fruit: fruit.price, reverse=True)
+  
+    def dec_quantity(self, item):
+        match item.name:
+            case "banana":
+                if self.quantity['banana'] == 0:
+                    print("Sorry! Banana is out of stock")
+                else:
+                    
+                return self.quantity['banana'] -= 1
+            case "apple":
+                if self.quantity['apple'] == 0:
+                    print("Sorry! Apple is out of stock")
+                else:
+                    self.quantity['apple'] -= 1
+            case "orange":
+                if self.quantity['orange'] == 0:
+                    print("Sorry! Orange is out of stock")      
+                else:
+                    self.quantity['orange'] -= 1        
+
+    def inc_quantity(self, item):
+        match item.name:
+            case "banana":
+                    self.quantity['banana'] += 1
+            case "apple":
+                    self.quantity['apple'] += 1
+            case "orange":
+                    self.quantity['orange'] += 1     
+
 
     def update_total(self): # Updates the total when new items are added 
         discounted_total = self.subtotal * (1 - self.discount)

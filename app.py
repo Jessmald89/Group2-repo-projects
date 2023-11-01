@@ -14,6 +14,7 @@ It also specifies "GET" and "POST" as methods that the route can handle.
 @app.route("/", methods=["GET", "POST"])  
 def index():
     remove_message = ""  
+    quantity_message = ""
     # Provides instructions for a form whose method is "POST"
     if request.method == "POST":
         # Adds item to cart
@@ -62,10 +63,21 @@ def index():
         # Sorts the items in the cart by price in ascending order
         elif "form5_submit" in request.form and request.form['form5_submit'] == 'Low-to-High': 
             user_cart.sort("asc")
-
+        
+        # Displays the quantity of items
+        elif "form6_submit" in request.form:
+            check_quantity = request.form["check_quantity"]
+            
+            # Check if the cart is not empty before attempting removal
+            if check_quantity == "banana":
+                quantity_message = f"Number of bananas in stock: {user_cart.quantity['banana']}"
+            elif check_quantity == "apple":
+                quantity_message = f"Number of apples in stock: {user_cart.quantity['apple']}" 
+            elif check_quantity == "orange":
+                quantity_message = f"Number of oranges in stock: {user_cart.quantity['orange']}" 
     return render_template("index.html", cart=user_cart, item_list=user_cart.item_names, subtotal=user_cart.subtotal, 
                            total=user_cart.total, purchase_message=user_cart.purchase_message, remove_message=remove_message,
-                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)# Rendering templates is how Flask interfaces with html.
+                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE, quantity_message = quantity_message)# Rendering templates is how Flask interfaces with html.
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version

@@ -37,6 +37,24 @@
             <br>
             <form method="POST">
                 <fieldset>
+                    <label for="check_quantity">Check quantity of an item:</label>
+                    <select name="check_quantity" required>
+                        <option value="banana">Banana</option>
+                        <option value="apple">Apple</option>
+                        <option value="orange">Orange</option>
+                    </select>
+                    {% if quantity_message == "" %}
+                        <p></p>
+                    {% else %}
+                        <p>{{ quantity_message }}</p>
+                    {% endif %}
+
+                    <input type="submit" name="form6_submit" value="Quantity" />
+                </fieldset>
+            </form>
+            <br>
+            <form method="POST">
+                <fieldset>
                     <label for="discount_code">Enter Discount Code:</label>
                     <input type="text" name="discount_code" />
                     <input type="submit" name="form4_submit" value="Apply Discount" />
