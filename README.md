@@ -120,16 +120,17 @@ Then I should see the main screen for the Fruit Stand application
 from behave import * 
 @given(‘I have initiated the application by running the app module in my project’) 
 def run_the_application() 
-Code to start the application 
+__Code to start the application__
 pass  
+
 @when(‘I launch the application with the given link provided by the output’) 
 
- Code to open the application
+ __Code to open the application__
 def open_the_application(): 
 pass 
 
 @then(‘I should see the main screen for the Fruit Stand application’) 
-Code that verifies that the main screen of the application is displayed  
+__Code that verifies that the main screen of the application is displayed__
 def main_screen_of_application(): 
 pass  
 
