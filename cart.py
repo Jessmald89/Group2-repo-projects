@@ -8,14 +8,18 @@ class Cart(object):
         self.purchase_message = ""
         self.discount_applied = False 
         self.total = 0.0
-        self.quantity = {'banana':5, 'apple':5, 'orange':5}
+        self.quantity = {'Banana': 5, 'Apple': 5, 'Orange': 5}
         
     def add(self, item):
         self.purchase_message = ""
-        self.item_names.append(item)
-        self.subtotal += item.price
-        self.dec_quantity(item)
-        self.update_total()
+        if self.quantity[item.name] == 0:
+            return "Item is out of stock!"
+        else:
+            self.item_names.append(item)
+            self.subtotal += item.price
+            self.dec_quantity(item)
+            self.update_total()
+            return "Item added successfully."
 
     def remove(self, item):
         for i in self.item_names:
@@ -38,31 +42,21 @@ class Cart(object):
   
     def dec_quantity(self, item):
         match item.name:
-            case "banana":
-                if self.quantity['banana'] == 0:
-                    print("Sorry! Banana is out of stock")
-                else:
-                    
-                return self.quantity['banana'] -= 1
-            case "apple":
-                if self.quantity['apple'] == 0:
-                    print("Sorry! Apple is out of stock")
-                else:
-                    self.quantity['apple'] -= 1
-            case "orange":
-                if self.quantity['orange'] == 0:
-                    print("Sorry! Orange is out of stock")      
-                else:
-                    self.quantity['orange'] -= 1        
+            case "Banana":
+                self.quantity['Banana'] -= 1
+            case "Apple":
+                self.quantity['Apple'] -= 1
+            case "Orange":
+                self.quantity['Orange'] -= 1        
 
     def inc_quantity(self, item):
         match item.name:
-            case "banana":
-                    self.quantity['banana'] += 1
-            case "apple":
-                    self.quantity['apple'] += 1
-            case "orange":
-                    self.quantity['orange'] += 1     
+            case "Banana":
+                    self.quantity['Banana'] += 1
+            case "Apple":
+                    self.quantity['Apple'] += 1
+            case "Orange":
+                    self.quantity['Orange'] += 1     
 
 
     def update_total(self): # Updates the total when new items are added 

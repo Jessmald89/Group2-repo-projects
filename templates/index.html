@@ -14,9 +14,9 @@
                 <fieldset>
                     <label for="add_operation">Select an item:</label>
                     <select name="add_operation" required>
-                        <option value="banana">Banana</option>
-                        <option value="apple">Apple</option>
-                        <option value="orange">Orange</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Orange">Orange</option>
                     </select>
                     <input type="submit" name="form1_submit" value="Add to cart" />
                 </fieldset>
@@ -26,9 +26,9 @@
                 <fieldset>
                     <label for="remove_operation">Remove an item:</label>
                     <select name="remove_operation" required>
-                        <option value="banana">Banana</option>
-                        <option value="apple">Apple</option>
-                        <option value="orange">Orange</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Orange">Orange</option>
                     </select>
 
                     <input type="submit" name="form2_submit" value="Remove" />
@@ -39,9 +39,9 @@
                 <fieldset>
                     <label for="check_quantity">Check quantity of an item:</label>
                     <select name="check_quantity" required>
-                        <option value="banana">Banana</option>
-                        <option value="apple">Apple</option>
-                        <option value="orange">Orange</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Orange">Orange</option>
                     </select>
                     {% if quantity_message == "" %}
                         <p></p>
@@ -92,6 +92,11 @@
             <p>Subtotal: ${{ "%.2f"|format(subtotal) }}</p>
             {% if remove_message == "Item not found in the cart!" %}
                 <p>{{ remove_message }}</p>
+            {% else %}
+                <p></p>
+            {% endif %}
+            {% if add_message == "Item is out of stock!" %}
+                <p>{{ add_message }}</p>
             {% else %}
                 <p></p>
             {% endif %}
