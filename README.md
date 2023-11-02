@@ -41,7 +41,7 @@ Selenium Lab F/U: 10/15/23
 
 RTM Meeting: 10/22/23
 
-BDD Lab F/U: 10/26/23
+BDD Lab F/U: 10/26/23, 11/2/23
 
 API Tests Lab F/U
 

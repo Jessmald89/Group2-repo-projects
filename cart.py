@@ -8,18 +8,25 @@ class Cart(object):
         self.purchase_message = ""
         self.discount_applied = False 
         self.total = 0.0
-
+        self.quantity = {'Banana': 5, 'Apple': 5, 'Orange': 5}
+        
     def add(self, item):
         self.purchase_message = ""
-        self.item_names.append(item)
-        self.subtotal += item.price
-        self.update_total()
+        if self.quantity[item.name] == 0:
+            return "Item is out of stock!"
+        else:
+            self.item_names.append(item)
+            self.subtotal += item.price
+            self.dec_quantity(item)
+            self.update_total()
+            return "Item added successfully."
 
     def remove(self, item):
         for i in self.item_names:
             if item.name == i.name:
                 self.item_names.remove(i)
                 self.subtotal -= item.price
+                self.inc_quantity(item)
                 self.update_total()
                 return "Item removed successfully."
             else:
@@ -32,6 +39,25 @@ class Cart(object):
             self.item_names.sort(key=lambda fruit: fruit.price, reverse=False)
         if mode == "desc":
             self.item_names.sort(key=lambda fruit: fruit.price, reverse=True)
+  
+    def dec_quantity(self, item):
+        match item.name:
+            case "Banana":
+                self.quantity['Banana'] -= 1
+            case "Apple":
+                self.quantity['Apple'] -= 1
+            case "Orange":
+                self.quantity['Orange'] -= 1        
+
+    def inc_quantity(self, item):
+        match item.name:
+            case "Banana":
+                    self.quantity['Banana'] += 1
+            case "Apple":
+                    self.quantity['Apple'] += 1
+            case "Orange":
+                    self.quantity['Orange'] += 1     
+
 
     def update_total(self): # Updates the total when new items are added 
         discounted_total = self.subtotal * (1 - self.discount)
