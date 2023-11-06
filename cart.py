@@ -30,9 +30,9 @@ class Cart(object):
                 self.update_total()
                 return "Item removed successfully."
             else:
-                error_message = "Item not found in the cart!"
-                return error_message
-        return ""
+                continue
+        error_message = "Item not found in the cart!"
+        return error_message
         
     def sort(self, mode):
         if mode == "asc":
