@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from cart import Cart
 from food import Food
 from constant_values import BANANA_PRICE, APPLE_PRICE, ORANGE_PRICE, DISCOUNT, DISCOUNT_CODE
@@ -19,7 +19,7 @@ def index():
     # Provides instructions for a form whose method is "POST"
     if request.method == "POST":
         # Adds item to cart
-        if "form1_submit" in request.form:
+        if "add_submit" in request.form:
             add_operation = request.form["add_operation"]   # Finds element in html template where name="add_operation"
 
             if add_operation == "Banana":
@@ -33,7 +33,7 @@ def index():
                 add_message = user_cart.add(Orange)
 
         # Removes item from cart
-        elif "form2_submit" in request.form:
+        elif "remove_submit" in request.form:
             remove_operation = request.form["remove_operation"]
             
             # Check if the cart is not empty before attempting removal
@@ -47,26 +47,20 @@ def index():
                 Orange = Food("Orange", ORANGE_PRICE)
                 remove_message = user_cart.remove(Orange)
 
-        #Clears the list and resets the subtotal. Confirms Purchase.
-        elif "form3_submit" in request.form: 
-            user_cart.purchase()
-        
-        #Applies a discount code. Updates subtotal into Total.
-        elif "form4_submit" in request.form: 
-            discount_code = request.form.get("discount_code")
-            if discount_code == DISCOUNT_CODE:
-                user_cart.apply_discount(DISCOUNT)
-
         # Sorts the items in the cart by price in descending order
-        elif "form5_submit" in request.form and request.form['form5_submit'] == 'High-to-Low': 
+        elif "sort_submit" in request.form and request.form['sort_submit'] == 'High-to-Low': 
             user_cart.sort("desc")
 
         # Sorts the items in the cart by price in ascending order
-        elif "form5_submit" in request.form and request.form['form5_submit'] == 'Low-to-High': 
+        elif "sort_submit" in request.form and request.form['sort_submit'] == 'Low-to-High': 
             user_cart.sort("asc")
+
+        # Redirects user to cart page
+        elif "see_cart" in request.form:
+            return redirect(url_for('cart'))
         
         # Displays the quantity of items
-        elif "form6_submit" in request.form:
+        elif "quantity_form" in request.form:
             check_quantity = request.form["check_quantity"]
             
             # Check if the cart is not empty before attempting removal
@@ -76,9 +70,36 @@ def index():
                 quantity_message = f"Number of Apples in stock: {user_cart.quantity['Apple']}" 
             elif check_quantity == "Orange":
                 quantity_message = f"Number of Oranges in stock: {user_cart.quantity['Orange']}" 
-    return render_template("index.html", cart=user_cart, item_list=user_cart.item_names, subtotal=user_cart.subtotal, 
+    return render_template("index.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, 
                            total=user_cart.total, purchase_message=user_cart.purchase_message, remove_message=remove_message, add_message = add_message,
                            BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE, quantity_message = quantity_message)# Rendering templates is how Flask interfaces with html.
+
+@app.route("/cart", methods=["GET", "POST"])
+def cart():
+    if request.method == "POST":
+        #Clears the list and resets the subtotal. Confirms Purchase.
+        if "purchase_submit" in request.form: 
+            user_cart.purchase()
+        
+        #Applies a discount code. Updates subtotal into Total.
+        elif "discount_submit" in request.form: 
+            discount_code = request.form.get("discount_code")
+            if discount_code == DISCOUNT_CODE:
+                user_cart.apply_discount(DISCOUNT)
+
+        # Sorts the items in the cart by price in descending order
+        elif "sort_submit" in request.form and request.form['sort_submit'] == 'High-to-Low': 
+            user_cart.sort("desc")
+
+        # Sorts the items in the cart by price in ascending order
+        elif "sort_submit" in request.form and request.form['sort_submit'] == 'Low-to-High': 
+            user_cart.sort("asc")
+
+        elif "return_home" in request.form:
+            return redirect(url_for('index'))
+
+    return render_template("cart.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message,
+                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version

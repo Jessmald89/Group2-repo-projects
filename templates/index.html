@@ -18,7 +18,7 @@
                         <option value="Apple">Apple</option>
                         <option value="Orange">Orange</option>
                     </select>
-                    <input type="submit" name="form1_submit" value="Add to cart" />
+                    <input type="submit" name="add_submit" value="Add to cart" />
                 </fieldset>
             </form>
             <br>
@@ -31,7 +31,7 @@
                         <option value="Orange">Orange</option>
                     </select>
 
-                    <input type="submit" name="form2_submit" value="Remove" />
+                    <input type="submit" name="remove_submit" value="Remove" />
                 </fieldset>
             </form>
             <br>
@@ -49,22 +49,13 @@
                         <p>{{ quantity_message }}</p>
                     {% endif %}
 
-                    <input type="submit" name="form6_submit" value="Quantity" />
+                    <input type="submit" name="quantity_form" value="Quantity" />
                 </fieldset>
             </form>
-            <br>
             <form method="POST">
                 <fieldset>
-                    <label for="discount_code">Enter Discount Code:</label>
-                    <input type="text" name="discount_code" />
-                    <input type="submit" name="form4_submit" value="Apply Discount" />
-                </fieldset>
-            </form>
-            <br>
-            <form method="POST">
-                <fieldset>
-                    <label for="purchase_operation">Purchase Items in Cart:</label>
-                    <input type="submit" name="form3_submit" value="Purchase" />
+                    <label for="purchase_operation">Proceed to Checkout:</label>
+                    <input type="submit" name="see_cart" value="Checkout" />
                 </fieldset>
                 <br>
             </form>
@@ -73,8 +64,8 @@
         <div class="right-box">
             <form method="POST">
                 <fieldset>
-                    <input type="submit" name="form5_submit" value="High-to-Low" />
-                    <input type="submit" name="form5_submit" value="Low-to-High" />
+                    <input type="submit" name="sort_submit" value="High-to-Low" />
+                    <input type="submit" name="sort_submit" value="Low-to-High" />
                 </fieldset>
                 <br>
             </form>

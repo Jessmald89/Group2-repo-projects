@@ -2,7 +2,7 @@ from constant_values import BANANA_PRICE, APPLE_PRICE, ORANGE_PRICE
 
 class Cart(object):
     def __init__(self):
-        self.item_names = []
+        self.items = []
         self.subtotal = 0.0
         self.discount = 0.0
         self.purchase_message = ""
@@ -15,16 +15,16 @@ class Cart(object):
         if self.quantity[item.name] == 0:
             return "Item is out of stock!"
         else:
-            self.item_names.append(item)
+            self.items.append(item)
             self.subtotal += item.price
             self.dec_quantity(item)
             self.update_total()
             return "Item added successfully."
 
     def remove(self, item):
-        for i in self.item_names:
+        for i in self.items:
             if item.name == i.name:
-                self.item_names.remove(i)
+                self.items.remove(i)
                 self.subtotal -= item.price
                 self.inc_quantity(item)
                 self.update_total()
@@ -36,9 +36,9 @@ class Cart(object):
         
     def sort(self, mode):
         if mode == "asc":
-            self.item_names.sort(key=lambda fruit: fruit.price, reverse=False)
+            self.items.sort(key=lambda fruit: fruit.price, reverse=False)
         if mode == "desc":
-            self.item_names.sort(key=lambda fruit: fruit.price, reverse=True)
+            self.items.sort(key=lambda fruit: fruit.price, reverse=True)
   
     def dec_quantity(self, item):
         match item.name:
@@ -80,11 +80,11 @@ class Cart(object):
     
 
     def display(self):
-        print(f"Your cart: {self.item_names}")
+        print(f"Your cart: {self.items}")
         print(f"Your subtotal: ${self.subtotal:.2f}")
 
     def purchase(self):
-        self.item_names.clear()
+        self.items.clear()
         self.subtotal = 0.0
         self.discount = 0.0
         self.discount_applied = False # Resets total and discount code
