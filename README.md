@@ -50,7 +50,6 @@ TDD Lab F/U
 Secondary Lab F/U
 
 
-# Branches
-__Purpose__
+# Important Note on Branches
 The main branch contains the most recent version of the Fruit Stand web application. Each lab that we make will have its own branch, and that branch will contain whatever the latest version of the app was at the time of making the lab. If the version of the app in the main branch is used to test a lab, the lab may not function properly.
 
