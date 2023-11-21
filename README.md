@@ -33,7 +33,7 @@ Sprint 1 Instructor meeting: 10/04/23
 
 Sprint 2 Instructor meeting: 10/24/23 @ 7pm
 
-Sprint 3 Instructor meeting:
+Sprint 3 Instructor meeting: 11/22/23 @ 7pm
 
 Sprint 4 Instructor meeting:
 
