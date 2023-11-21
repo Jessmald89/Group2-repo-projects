@@ -43,7 +43,7 @@ RTM Meeting: 10/22/23
 
 BDD Lab F/U: 10/26/23, 11/2/23
 
-API Tests Lab F/U: 11/9/23
+API Tests Lab F/U: 11/9/23, 11/17/23
 
 TDD Lab F/U
 
