@@ -44,12 +44,15 @@
             <br>
             <form method="POST">
                 <fieldset>
+                    <label for="user_name">Enter First Name:</label>
+                    <input type="text" name="user_name" />
                     <label for="purchase_operation">Purchase Items in Cart:</label>
                     <input type="submit" name="purchase_submit" value="Purchase" />
                 </fieldset>
                 <br>
             </form>
             <br>
+            <p>{{ name_message }}</p>
             <br>
             <form method="POST">
                 <fieldset>
