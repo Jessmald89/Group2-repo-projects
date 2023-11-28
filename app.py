@@ -16,6 +16,8 @@ def index():
     remove_message = ""  
     quantity_message = ""
     add_message = ""
+    name_message = ""
+    purchase_message = ""
     # Provides instructions for a form whose method is "POST"
     if request.method == "POST":
         # Adds item to cart
@@ -47,6 +49,16 @@ def index():
                 Orange = Food("Orange", ORANGE_PRICE)
                 remove_message = user_cart.remove(Orange)
 
+        elif "name_submit" in request.form:
+            user_name = request.form.get("user_name")
+
+            if user_name.isalpha():
+                name_message = ""
+                user_cart.name = user_name
+            else:
+                name_message = "Invalid name. Must contain only letters A-Z."
+
+
         # Sorts the items in the cart by price in descending order
         elif "sort_submit" in request.form and request.form['sort_submit'] == 'High-to-Low': 
             user_cart.sort("desc")
@@ -57,8 +69,12 @@ def index():
 
         # Redirects user to cart page
         elif "see_cart" in request.form:
-            return redirect(url_for('cart'))
-        
+            while not user_cart.is_empty() and not user_cart.name == "":
+                return redirect(url_for('cart'))
+            if user_cart.is_empty():
+                purchase_message = "Cart is empty!"
+            elif user_cart.name == "":
+                purchase_message = "Please enter your name"
         # Displays the quantity of items
         elif "quantity_form" in request.form:
             check_quantity = request.form["check_quantity"]
@@ -71,8 +87,8 @@ def index():
             elif check_quantity == "Orange":
                 quantity_message = f"Number of Oranges in stock: {user_cart.quantity['Orange']}" 
     return render_template("index.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, 
-                           total=user_cart.total, purchase_message=user_cart.purchase_message, remove_message=remove_message, add_message = add_message,
-                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE, quantity_message = quantity_message)# Rendering templates is how Flask interfaces with html.
+                           total=user_cart.total, purchase_message=purchase_message, remove_message=remove_message, add_message = add_message,
+                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE, quantity_message = quantity_message, name_message=name_message)# Rendering templates is how Flask interfaces with html.
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
@@ -80,12 +96,7 @@ def cart():
     if request.method == "POST":
         #Clears the list and resets the subtotal. Confirms Purchase.
         if "purchase_submit" in request.form:
-            user_name = request.form.get("user_name") 
-            if user_name.isalpha():
-                name_message = ""
-                user_cart.purchase()
-            else:
-                name_message = "Invalid name. Must contain only letters A-Z."
+            user_cart.purchase()
         
         #Applies a discount code. Updates subtotal into Total.
         elif "discount_submit" in request.form: 
@@ -105,7 +116,7 @@ def cart():
             return redirect(url_for('index'))
 
     return render_template("cart.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message,
-                           name_message=name_message, BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
+                           user_name=user_cart.name, BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version

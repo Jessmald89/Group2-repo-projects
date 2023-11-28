@@ -35,6 +35,16 @@
                 </fieldset>
             </form>
             <br>
+            <form method = "POST">
+                <fieldset>
+                    <label for="user_name">Enter First Name:</label>
+                    <input type="text" name="user_name" />
+                    <input type ="submit" name="name_submit" value="Submit"/>
+                </fieldset>
+            </form>
+            <br>            
+            <p>{{ name_message }}</p>            
+            <br>
             <form method="POST">
                 <fieldset>
                     <label for="check_quantity">Check quantity of an item:</label>

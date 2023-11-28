@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="centered-container"></div>
-    <h1 class="banner">Your Cart</h1>
+    <h1 class="banner">{{ user_name }}'s Cart</h1>
         <div class="center">
             <form method="POST">
                 <fieldset>
@@ -17,7 +17,7 @@
                 </fieldset>
                 <br>
             </form>
-            <h2>Your Cart:</h2>
+            <h2>{{ user_name }}'s Cart:</h2>
             {% for fruit in item_list %}
                 {% if fruit.name == "Banana" %}
                     <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
@@ -44,15 +44,12 @@
             <br>
             <form method="POST">
                 <fieldset>
-                    <label for="user_name">Enter First Name:</label>
-                    <input type="text" name="user_name" />
                     <label for="purchase_operation">Purchase Items in Cart:</label>
                     <input type="submit" name="purchase_submit" value="Purchase" />
                 </fieldset>
                 <br>
             </form>
             <br>
-            <p>{{ name_message }}</p>
             <br>
             <form method="POST">
                 <fieldset>
