@@ -84,8 +84,11 @@ class Cart(object):
         print(f"Your subtotal: ${self.subtotal:.2f}")
 
     def purchase(self):
-        self.items.clear()
-        self.subtotal = 0.0
-        self.discount = 0.0
-        self.discount_applied = False # Resets total and discount code
-        self.purchase_message = "Thank you for purchasing!"
+        if len(self.items) > 0:
+            self.items.clear()
+            self.subtotal = 0.0
+            self.discount = 0.0
+            self.discount_applied = False # Resets total and discount code
+            self.purchase_message = "Thank you for purchasing!"
+        else:
+            self.purchase_message = "Cart is empty!"

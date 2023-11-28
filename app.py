@@ -76,10 +76,16 @@ def index():
 
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
+    name_message = ""
     if request.method == "POST":
         #Clears the list and resets the subtotal. Confirms Purchase.
-        if "purchase_submit" in request.form: 
-            user_cart.purchase()
+        if "purchase_submit" in request.form:
+            user_name = request.form.get("user_name") 
+            if user_name.isalpha():
+                name_message = ""
+                user_cart.purchase()
+            else:
+                name_message = "Invalid name. Must contain only letters A-Z."
         
         #Applies a discount code. Updates subtotal into Total.
         elif "discount_submit" in request.form: 
@@ -99,7 +105,7 @@ def cart():
             return redirect(url_for('index'))
 
     return render_template("cart.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message,
-                           BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
+                           name_message=name_message, BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version
