@@ -83,7 +83,8 @@ def cart():
             user_name = request.form.get("user_name") 
             if user_name.isalpha():
                 name_message = ""
-                user_cart.purchase()
+                user_cart.name = user_name
+                return redirect(url_for('receipt'))
             else:
                 name_message = "Invalid name. Must contain only letters A-Z."
         
@@ -106,6 +107,19 @@ def cart():
 
     return render_template("cart.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total, purchase_message=user_cart.purchase_message,
                            name_message=name_message, BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
+
+@app.route("/receipt", methods=["GET", "POST"])
+def receipt():
+    if request.method == "POST":
+        if "submit" in request.form:
+            user_cart.purchase()
+            user_cart.purchase_message = ""
+            return redirect(url_for('index'))
+
+    return render_template("receipt.html", cart=user_cart, item_list=user_cart.items, subtotal=user_cart.subtotal, total=user_cart.total,
+                            name = user_cart.name, BANANA_PRICE = BANANA_PRICE, APPLE_PRICE = APPLE_PRICE, ORANGE_PRICE = ORANGE_PRICE)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True) # Runs app in debug mode, change debug=False for production version

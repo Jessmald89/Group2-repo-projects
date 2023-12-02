@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Stand</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+    <div class="centered-container"></div>
+    <h1 class="banner">Receipt</h1>
+        <div class="center">
+            <h2>Thank you!</h2>
+            {% for fruit in item_list %}
+                {% if fruit.name == "Banana" %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% elif fruit.name == "Apple"  %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% elif fruit.name == "Orange"  %}
+                    <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
+                {% endif %}
+            {% endfor %}
+            <p>Subtotal: ${{ "%.2f"|format(subtotal) }}</p>
+            {% if cart.discount_applied %}
+            <p>Total: ${{ "%.2f"|format(cart.total) }}</p>
+            {% endif %}
+            <p>{{ purchase_message }}</p>
+            <br>
+            <form method="POST">
+                <fieldset>
+                    <label for="submit">Return Home:</label>
+                    <input type="submit" name="submit" value="Home" />
+                </fieldset>
+                <br>
+            </form>
+            <br>
+        </div>
+    <div>
+</body>
+</html>
