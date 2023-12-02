@@ -10,6 +10,7 @@ class Cart(object):
         self.discount_applied = False 
         self.total = 0.0
         self.quantity = {'Banana': 5, 'Apple': 5, 'Orange': 5}
+        self.name = ""
         
     def add(self, item):
         self.purchase_message = ""
@@ -58,6 +59,11 @@ class Cart(object):
                     self.quantity['Apple'] += 1
             case "Orange":
                     self.quantity['Orange'] += 1     
+
+    def is_empty(self):
+        return len(self.items) == 0
+    
+
 
 
     def update_total(self): # Updates the total when new items are added 
