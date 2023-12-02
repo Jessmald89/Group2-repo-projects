@@ -10,7 +10,6 @@ class Cart(object):
         self.discount_applied = False 
         self.total = 0.0
         self.quantity = {'Banana': 5, 'Apple': 5, 'Orange': 5}
-        self.name = ""
         
     def add(self, item):
         self.purchase_message = ""

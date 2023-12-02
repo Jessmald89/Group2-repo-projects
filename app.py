@@ -96,16 +96,14 @@ def cart():
     if request.method == "POST":
         #Clears the list and resets the subtotal. Confirms Purchase.
         if "purchase_submit" in request.form:
-
-            user_name = request.form.get("user_name") 
+            
+            user_name = user_cart.name
             if user_name.isalpha():
                 name_message = ""
                 user_cart.name = user_name
                 return redirect(url_for('receipt'))
             else:
                 name_message = "Invalid name. Must contain only letters A-Z."
-
-            user_cart.purchase()
 
         
         #Applies a discount code. Updates subtotal into Total.

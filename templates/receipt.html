@@ -10,7 +10,7 @@
     <div class="centered-container"></div>
     <h1 class="banner">Receipt</h1>
         <div class="center">
-            <h2>Thank you!</h2>
+            <h2>Thank you, {{ name }}!</h2>
             {% for fruit in item_list %}
                 {% if fruit.name == "Banana" %}
                     <p name="item_display">${{ "%.2f"|format(fruit.price) }} | {{ fruit.name }} </p>
