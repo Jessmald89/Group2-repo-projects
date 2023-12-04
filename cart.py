@@ -3,13 +3,13 @@ from constant_values import BANANA_PRICE, APPLE_PRICE, ORANGE_PRICE
 class Cart(object):
     def __init__(self):
         self.items = []
+        self.name = ""
         self.subtotal = 0.0
         self.discount = 0.0
         self.purchase_message = ""
         self.discount_applied = False 
         self.total = 0.0
         self.quantity = {'Banana': 5, 'Apple': 5, 'Orange': 5}
-        self.name = ""
         
     def add(self, item):
         self.purchase_message = ""
@@ -92,6 +92,7 @@ class Cart(object):
     def purchase(self):
         if len(self.items) > 0:
             self.items.clear()
+            self.name = ""
             self.subtotal = 0.0
             self.discount = 0.0
             self.discount_applied = False # Resets total and discount code
